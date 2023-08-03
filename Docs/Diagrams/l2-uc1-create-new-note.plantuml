@@ -1,0 +1,26 @@
+@startuml l2-uc1-create-new-note
+
+title Sequence - Create new note (UC1)
+
+actor "Benutzer" as user
+boundary "Anwendung" as winforms
+entity "Eingabe" as input
+entity "Ausgabe" as output
+control "Speichern" as service
+participant "Datenhaltung" as repository
+
+user -> winforms : Neue Notiz erstellen
+winforms -> input : erzeugt
+activate input
+input --> user : stellt Eingabefelder bereit
+user -> input : Titel und Text eingeben, speichern
+input -> service : Speichern
+service -> repository: Speichern
+repository --> service : Gespeichert
+service --> winforms : Gespeichert
+destroy input
+winforms -> output : erzeugt
+activate output
+output --> user : zeigt Bestätigungstext an
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml l1-use-cases
+
+title Notes - Use Cases
+
+left to right direction
+
+actor Benutzer as User
+
+rectangle Notes {
+    usecase (UC1: Neue Notiz erstellen) as UC1
+    usecase (UC2: Notizen anzeigen) as UC2
+    usecase (UC3: Notiz bearbeiten) as UC3
+    usecase (UC4: Notiz löschen) as UC4
+    usecase (UC5: Notizen nach Kategorien organisieren) as UC5
+}
+
+User -- UC1
+User -- UC2
+User -- UC3
+User -- UC4
+User -- UC5
+
+@enduml
