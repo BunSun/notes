@@ -1,0 +1,27 @@
+@startuml l2-uc2-edit-note
+
+title Sequence - Edit note (UC2)
+
+actor "Benutzer" as user
+boundary "Anwendung" as winforms
+entity "Eingabe" as input
+entity "Ausgabe" as output
+control "Speichern" as service
+participant "Datenhaltung" as repository
+
+user -> winforms : Notiz bearbeiten
+winforms -> input : erzeugt
+activate input
+input --> user : stellt Eingabefelder bereit
+user -> input : Neue Eingaben für Titel und Text eingeben, speichern
+input -> service : Speichern
+service -> repository: Aktualisieren
+repository --> service : Aktualisiert
+service --> winforms : Aktualisiert
+destroy input
+winforms -> output : erzeugt
+activate output
+output --> user : zeigt Bestätigungstext an
+
+@enduml
+

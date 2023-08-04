@@ -1,0 +1,23 @@
+@startuml l2-uc4-organize-notes
+
+title Sequence - Organize notes (UC4)
+
+actor "Benutzer" as user
+boundary "Anwendung" as winforms
+entity "Eingabe" as input
+entity "Ausgabe" as output
+
+user -> winforms : Notizen organisieren
+winforms -> input : erzeugt
+activate input
+input --> user : stellt Kategorien und Notizen zur Verfügung
+user -> input : Notiz einer Kategorie zuordnen
+input --> winforms : Kategorie zugewiesen
+user -> input : Neue Kategorie erstellen
+input --> winforms : Kategorie erstellt
+destroy input
+winforms -> output : erzeugt
+activate output
+output --> user : zeigt Bestätigungstext an
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml l2-uc3-delete-note
+
+title Sequence - Delete note (UC3)
+
+actor "Benutzer" as user
+boundary "Anwendung" as winforms
+entity "Eingabe" as input
+entity "Ausgabe" as output
+control "Löschen" as service
+participant "Datenhaltung" as repository
+
+user -> winforms : Notiz löschen
+winforms -> input : erzeugt
+activate input
+input --> user : Bestätigung anzeigen
+user -> input : Bestätigung "Löschen" auswählen
+input -> service : Löschen
+service -> repository: Löschen
+repository --> service : Gelöscht
+service --> winforms : Gelöscht
+destroy input
+winforms -> output : erzeugt
+activate output
+output --> user : zeigt Bestätigungstext an
+
+@enduml
