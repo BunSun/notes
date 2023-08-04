@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE57EBA9-AE96-4B7C-BE28-41963CEDBF19}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSun.Notes.Core", "Source\BSun.Notes.Core\BSun.Notes.Core.csproj", "{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSun.Notes.Core.Tests", "Test\BSun.Notes.Core.Tests\BSun.Notes.Core.Tests.csproj", "{64956A5B-3887-412F-87BF-F5364B4DE2CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2B21B47-5D7C-46F3-B175-881B9D4DBF63}
+	EndGlobalSection
+EndGlobal
