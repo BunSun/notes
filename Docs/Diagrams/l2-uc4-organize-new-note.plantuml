@@ -6,16 +6,21 @@ actor "Benutzer" as user
 boundary "Anwendung" as winforms
 entity "Eingabe" as input
 entity "Ausgabe" as output
+control "Speichern" as service
+participant "Datenhaltung" as repository
 
 user -> winforms : Notizen organisieren
 winforms -> input : erzeugt
 activate input
 input --> user : stellt Kategorien und Notizen zur Verfügung
 user -> input : Notiz einer Kategorie zuordnen
-input --> winforms : Kategorie zugewiesen
+input -> service : Speichern der Kategoriezuordnung
+service -> repository : Kategoriezuordnung speichern
+deactivate input
 user -> input : Neue Kategorie erstellen
-input --> winforms : Kategorie erstellt
-destroy input
+input -> service : Speichern der neuen Kategorie
+service -> repository : Neue Kategorie speichern
+deactivate input
 winforms -> output : erzeugt
 activate output
 output --> user : zeigt Bestätigungstext an
