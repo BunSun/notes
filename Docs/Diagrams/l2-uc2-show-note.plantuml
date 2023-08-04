@@ -1,0 +1,20 @@
+@startuml l2-uc2-show-note
+
+title Sequence - Show Note (UC2)
+
+actor "Benutzer" as user
+boundary "Anwendung" as winforms
+entity "Anzeige" as display
+control "Abrufen" as service
+participant "Datenhaltung" as repository
+
+user -> winforms : Notiz anzeigen
+winforms -> service : Abrufen
+service -> repository : Notizdaten abrufen
+repository --> service : Notizdaten
+service --> winforms : Notizdaten
+winforms -> display : Notiz anzeigen
+activate display
+display --> user : zeigt Notiz an
+
+@enduml
