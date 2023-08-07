@@ -33,3 +33,11 @@ Wenn der Benutzer eine Notiz nicht mehr benötigt, kann er sie aus der Liste der
 ### UC5: Notizen nach Kategorien organisieren
 
 Benutzer können verschiedene Kategorien erstellen, um ihre Notizen zu organisieren. Zum Beispiel können sie Kategorien wie "Persönlich", "Arbeit", "Einkaufsliste" usw. erstellen und Notizen entsprechend zuordnen.
+
+![Sequential Diagram](Docs/Images/l2-uc1-create-new-note.png)
+![Sequential Diagram](Docs/Images/l2-uc2-edit-note.png)
+![Sequential Diagram](Docs/Images/l2-uc3-delete-note.png)
+![Sequential Diagram](Docs/Images/l2-uc4-organize-notes.png)
+![Sequential Diagram](Docs/Images/l2-uc5-show-note.png)
+
+![Class Diagram](Docs/Images/l3-class-diagram.png)
