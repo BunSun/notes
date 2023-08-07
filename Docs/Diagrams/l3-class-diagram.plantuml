@@ -1,0 +1,28 @@
+@startuml l3-class-diagram
+
+class Notiz {
+  + Titel: String
+  + Text: String
+  + Erstelldatum: Date
+  + Bearbeitungsdatum: Date
+}
+
+class Kategorie {
+  + Name: String
+}
+
+class Notizverwaltungsanwendung {
+  - notizen: List<Notiz>
+  - kategorien: List<Kategorie>
+  + NeueNotizErstellen(Titel: String, Text: String): Notiz
+  + NotizBearbeiten(notiz: Notiz, neuerTitel: String, neuerText: String): void
+  + NotizLöschen(notiz: Notiz): void
+  + KategorieErstellen(Name: String): Kategorie
+  + NotizKategorieZuordnen(notiz: Notiz, kategorie: Kategorie): void
+}
+
+Notiz --> Kategorie: gehört zu
+Notizverwaltungsanwendung --> Notiz: enthält
+Notizverwaltungsanwendung --> Kategorie: enthält
+
+@enduml
