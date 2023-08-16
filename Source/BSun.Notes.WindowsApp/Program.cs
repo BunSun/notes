@@ -1,7 +1,5 @@
 using System;
-using System.Drawing;
 using System.Windows.Forms;
-using BSun.Notes.Core;
 
 namespace BSun.Notes.WindowsApp
 {
@@ -13,18 +11,14 @@ namespace BSun.Notes.WindowsApp
       [STAThread]
       static void Main()
       {
-         // To customize application configuration such as set high DPI settings or default font,
-         // see https://aka.ms/applicationconfiguration.
+
          //ApplicationConfiguration.Initialize();    
+         //var noteModel = new NoteModel();
+         //var noteController = new NoteController(noteModel);
 
-         // Instantiate the NoteModel
-         var noteModel = new NoteModel();
+         //Application.Run(new MainForm(noteController));
 
-         // Instantiate the NoteController with the NoteModel
-         var noteController = new NoteController(noteModel);
-
-         // Run the application with Form1 and the NoteController
-         Application.Run(new MainForm(noteController));
+         Application.Run(new NotesListForm());
       }
    }
 }

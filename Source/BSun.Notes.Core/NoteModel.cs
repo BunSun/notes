@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using BSun.Notes.Core;
 
 namespace BSun.Notes.Core
 {
@@ -36,6 +35,13 @@ namespace BSun.Notes.Core
 
          Saved?.Invoke(this, EventArgs.Empty);
       }
+      public void Load(string noteFilePath)
+      {
+         if (File.Exists(noteFilePath))
+         {
+            Title = Path.GetFileNameWithoutExtension(noteFilePath);
+            Text = File.ReadAllText(noteFilePath);
+         }
+      }
    }
 }
-

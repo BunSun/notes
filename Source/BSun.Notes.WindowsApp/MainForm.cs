@@ -32,6 +32,8 @@ namespace BSun.Notes.WindowsApp
             _controller.SaveNote();
             ShowSaveConfirmation();
          }
+         DialogResult = DialogResult.OK; // Setze DialogResult auf OK
+         Close(); // Schließe das Bearbeitungsfenster
       }
 
       private void textBoxTitle_TextChanged(object sender, EventArgs e)
@@ -53,6 +55,13 @@ namespace BSun.Notes.WindowsApp
          var newNoteForm = new MainForm(_controller);
          newNoteForm.Show();
       }
-      
+      public void PrepopulateNoteFields(string title, string text)
+      {
+         // Setze den vorausgefüllten Titel und Text
+         textBoxTitle.Text = title;
+         textBoxText.Text = text;
+      }
+
+
    }
 }
