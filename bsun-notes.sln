@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSun.Notes.Core", "Source\BSun.Notes.Core\BSun.Notes.Core.csproj", "{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSun.Notes.Core", "Source\BSun.Notes.Core\BSun.Notes.Core.csproj", "{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSun.Notes.Core.Tests", "Test\BSun.Notes.Core.Tests\BSun.Notes.Core.Tests.csproj", "{64956A5B-3887-412F-87BF-F5364B4DE2CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSun.Notes.Core.Tests", "Test\BSun.Notes.Core.Tests\BSun.Notes.Core.Tests.csproj", "{64956A5B-3887-412F-87BF-F5364B4DE2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSun.Notes.WindowsApp", "Source\BSun.Notes.WindowsApp\BSun.Notes.WindowsApp.csproj", "{E1416849-3EFF-4527-9E2B-4D1D088AAEC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64956A5B-3887-412F-87BF-F5364B4DE2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1416849-3EFF-4527-9E2B-4D1D088AAEC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1416849-3EFF-4527-9E2B-4D1D088AAEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1416849-3EFF-4527-9E2B-4D1D088AAEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1416849-3EFF-4527-9E2B-4D1D088AAEC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
