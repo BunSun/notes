@@ -26,12 +26,13 @@ namespace BSun.Notes.Core
       public void Save()
       {
          string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-         string filePath = Path.Combine(desktopPath, $"{Title}.txt");
+         string notesFolderPath = Path.Combine(desktopPath, "Notes");
 
-         using (StreamWriter writer = new StreamWriter(filePath))
-         {
-            writer.WriteLine($"{Text}");
-         }
+         // Erstelle den Ordner, wenn er nicht existiert
+         Directory.CreateDirectory(notesFolderPath);
+
+         string noteFilePath = Path.Combine(notesFolderPath, $"{Title}.txt");
+         File.WriteAllText(noteFilePath, Text);
 
          Saved?.Invoke(this, EventArgs.Empty);
       }
