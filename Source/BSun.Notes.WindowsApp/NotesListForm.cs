@@ -30,8 +30,8 @@ namespace BSun.Notes.WindowsApp
 
       private void PopulateNoteList()
       {
+         listBoxNotes.DataSource = null;
          listBoxNotes.DataSource = _noteFiles;
-
       }
 
       private void OpenNoteForm(string noteFilePath)
@@ -70,6 +70,29 @@ namespace BSun.Notes.WindowsApp
       private void newNoteToolStripMenuItem_Click(object sender, EventArgs e)
       {
          OpenNoteForm(null);
+      }
+
+      private void buttonDelete_Click(object sender, EventArgs e)
+      {
+         if (listBoxNotes.SelectedItem != null)
+         {
+            string selectedNoteFilePath = listBoxNotes.SelectedItem.ToString();
+            DeleteNote(selectedNoteFilePath);
+         }
+      }
+      private void DeleteNote(string noteFilePath)
+      {
+         if (File.Exists(noteFilePath))
+         {
+            DialogResult result = MessageBox.Show("Do you want to delete this note?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+               File.Delete(noteFilePath);
+               _noteFiles.Remove(noteFilePath);
+               PopulateNoteList();
+            }
+         }
       }
    }
 }
