@@ -41,6 +41,8 @@ namespace BSun.Notes.Core
          }
       }
 
+      public void RaiseSaved() => Saved?.Invoke(this, EventArgs.Empty);
+
       [Obsolete("Use NoteController.SaveNote() instead.")]
       public void Save()
       {

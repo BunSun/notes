@@ -31,8 +31,9 @@ namespace BSun.Notes.Core
       public void SaveNote()
       {
          var succeeded = _repository.Write(_model.Note);
-         if (!succeeded)
+         if (succeeded)
          {
+            _model.RaiseSaved();
             // TODO Trigger model?
          }
       }

@@ -1,24 +1,33 @@
-   using System;
-   using System.Windows.Forms;
+using System;
+using System.IO;
+using System.Windows.Forms;
+using BSun.Notes.FileSystem;
 
-   namespace BSun.Notes.WindowsApp
+namespace BSun.Notes.WindowsApp
+{
+   internal static class Program
    {
-      internal static class Program
+      /// <summary>
+      ///  The main entry point for the application.
+      /// </summary>
+      [STAThread]
+      static void Main()
       {
-         /// <summary>
-         ///  The main entry point for the application.
-         /// </summary>
-         [STAThread]
-         static void Main()
-         {
 
-            //ApplicationConfiguration.Initialize();    
-            //var noteModel = new NoteModel();
-            //var noteController = new NoteController(noteModel);
+         //ApplicationConfiguration.Initialize();
 
-            //Application.Run(new MainForm(noteController));
+         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+         var notesFolderPath = Path.Combine(desktopPath, "Notes");
+         Directory.CreateDirectory(notesFolderPath);
 
-            Application.Run(new NotesListForm());
-         }
+         var repository = new FileSystemRepository(notesFolderPath);
+         var note = new Core.Note();
+         var noteModel = new Core.NoteModel(note);
+         var noteController = new Core.NoteController(noteModel, repository);
+
+         Application.Run(new MainForm(noteController));
+
+         //Application.Run(new NotesListForm());
       }
    }
+}

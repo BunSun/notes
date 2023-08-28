@@ -36,9 +36,11 @@ namespace BSun.Notes.WindowsApp
 
       private void OpenNoteForm(string noteFilePath)
       {
-         var noteModel = new NoteModel();
+         // FIXME
+         var noteModel = new NoteModel(new Note());
          noteModel.Load(noteFilePath);
-         var noteController = new NoteController(noteModel);
+         // FIXME
+         var noteController = new NoteController(noteModel, null);
 
          var noteEditForm = new MainForm(noteController);
 

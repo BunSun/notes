@@ -7,6 +7,8 @@ namespace BSun.Notes.FileSystem
 {
    public sealed class FileSystemRepository : Core.IRepository<Core.Note>
    {
+      public const string Extension = ".txt";
+
       private readonly string _directoryName;
 
       public FileSystemRepository(string directoryName)
@@ -54,7 +56,7 @@ namespace BSun.Notes.FileSystem
          var invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
          var result = new string(title.Select(x => invalidFileNameChars.Contains(x) ? '-' : x).ToArray());
 
-         return result + ".note";
+         return result + Extension;
       }
    }
 }

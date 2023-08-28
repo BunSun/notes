@@ -26,7 +26,7 @@ namespace BSun.Notes.WindowsApp
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(200, 22);
             this.textBoxTitle.TabIndex = 0;
-            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged_1);
+            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
             // 
             // textBoxText
             // 
@@ -35,7 +35,7 @@ namespace BSun.Notes.WindowsApp
             this.textBoxText.Name = "textBoxText";
             this.textBoxText.Size = new System.Drawing.Size(200, 100);
             this.textBoxText.TabIndex = 1;
-            this.textBoxText.TextChanged += new System.EventHandler(this.textBoxText_TextChanged_1);
+            this.textBoxText.TextChanged += new System.EventHandler(this.textBoxText_TextChanged);
             // 
             // buttonSave
             // 
@@ -45,7 +45,7 @@ namespace BSun.Notes.WindowsApp
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click_1);
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonNewNote
             // 

@@ -98,6 +98,10 @@
       <Project>{CF7FB1DD-6590-43D1-9637-AE8BB806CA00}</Project>
       <Name>BSun.Notes.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BSun.Notes.FileSystem\BSun.Notes.FileSystem.csproj">
+      <Project>{ee65420f-88d4-47fd-859f-e4de4b72c3a3}</Project>
+      <Name>BSun.Notes.FileSystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
