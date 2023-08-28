@@ -24,10 +24,12 @@ namespace BSun.Notes.Core
       public void ChangeTitle(string title)
       {
          _model.Title = title;
+         Console.WriteLine("Model title set to: " + _model.Title);
       }
 
       public void SaveNote()
       {
+         Console.WriteLine("SaveNote method called in NoteController");
          _model.Save();
       }
    }
