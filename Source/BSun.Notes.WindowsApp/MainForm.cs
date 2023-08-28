@@ -11,8 +11,6 @@ namespace BSun.Notes.WindowsApp
 
       public MainForm(NoteController controller)
       {
-         //var noteModel = new NoteModel();
-         //var noteController = new NoteController(noteModel);
          _controller = controller;
 
          InitializeComponent();
@@ -22,6 +20,9 @@ namespace BSun.Notes.WindowsApp
       {
          textBoxTitle.DataBindings.Add(new Binding(nameof(TextBox.Text), _controller.Model, nameof(INoteModel.Title)));
          textBoxText.DataBindings.Add(new Binding(nameof(TextBox.Text), _controller.Model, nameof(INoteModel.Text)));
+
+         comboBoxCategories.DataSource = CategoryManager.Categories;
+         comboBoxCategories.DataBindings.Add(new Binding("SelectedItem", _controller.Model, "Category", true, DataSourceUpdateMode.OnPropertyChanged));
       }
       private void ShowSaveConfirmation()
       {
@@ -60,6 +61,17 @@ namespace BSun.Notes.WindowsApp
          }
          DialogResult = DialogResult.OK; // Setze DialogResult auf OK
          Close(); // Schließe das Bearbeitungsfenster
+      }
+
+      private void buttonAddCategory_Click(object sender, EventArgs e)
+      {
+         string newCategory = Prompt.ShowDialog("Neue Kategorie:", "Kategorie hinzufügen");
+         if (!string.IsNullOrEmpty(newCategory) && !CategoryManager.Categories.Contains(newCategory))
+         {
+            CategoryManager.Categories.Add(newCategory);
+            comboBoxCategories.DataSource = null; // Datenbindung zurücksetzen
+            comboBoxCategories.DataSource = CategoryManager.Categories;
+         }
       }
    }
 }

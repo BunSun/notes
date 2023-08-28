@@ -11,6 +11,7 @@ namespace BSun.Notes.Core
       private string _originalFilePath;
 
       public event EventHandler Saved;
+      public string Category { get; set; }
 
       public string Title
       {
