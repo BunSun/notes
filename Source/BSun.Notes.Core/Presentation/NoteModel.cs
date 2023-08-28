@@ -5,26 +5,43 @@ namespace BSun.Notes.Core
 {
    public sealed class NoteModel : INoteModel
    {
-      private string _title;
-      private string _text;
+      private readonly Note _note;
+
       private string _filePath;
       private string _originalFilePath;
 
+      public event EventHandler TextChanged;
+      public event EventHandler TitleChanged;
       public event EventHandler Saved;
-      public string Category { get; set; }
 
-      public string Title
+      public NoteModel(Note note)
       {
-         get { return _title; }
-         set { _title = value; }
+         _note = note;
       }
+
+      public Note Note { get { return _note; } }
 
       public string Text
       {
-         get { return _text; }
-         set { _text = value; }
+         get { return _note.Text; }
+         set
+         {
+            _note.Text = value;
+            TextChanged?.Invoke(this, EventArgs.Empty);
+         }
       }
 
+      public string Title
+      {
+         get { return _note.Title; }
+         set
+         {
+            _note.Title = value;
+            TitleChanged?.Invoke(this, EventArgs.Empty);
+         }
+      }
+
+      [Obsolete("Use NoteController.SaveNote() instead.")]
       public void Save()
       {
          // Überprüfe, ob ein Dateipfad für die Note festgelegt wurde
@@ -56,6 +73,8 @@ namespace BSun.Notes.Core
          // Benachrichtige über das Speichern
          Saved?.Invoke(this, EventArgs.Empty);
       }
+
+      [Obsolete("No not use, has to be implemented somewhere else.")]
       public void Load(string noteFilePath)
       {
          if (File.Exists(noteFilePath))

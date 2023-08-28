@@ -7,11 +7,13 @@ namespace BSun.Notes.Core
 {
    public sealed class NoteController
    {
-      private NoteModel _model;
+      private readonly IRepository<Note> _repository;
+      private readonly NoteModel _model;
 
-      public NoteController(NoteModel model)
+      public NoteController(NoteModel model, IRepository<Note> repository)
       {
          _model = model;
+         _repository = repository;
       }
 
       public INoteModel Model { get { return _model; } }
@@ -28,7 +30,11 @@ namespace BSun.Notes.Core
 
       public void SaveNote()
       {
-         _model.Save();
+         var succeeded = _repository.Write(_model.Note);
+         if (!succeeded)
+         {
+            // TODO Trigger model?
+         }
       }
    }
 }

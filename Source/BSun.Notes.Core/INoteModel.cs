@@ -4,8 +4,12 @@ namespace BSun.Notes.Core
 {
    public interface INoteModel
    {
+      event EventHandler TextChanged;
+      event EventHandler TitleChanged;
       event EventHandler Saved;
-      string Title { get; }
+
       string Text { get; }
+
+      string Title { get; }
    }
 }
