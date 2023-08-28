@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\BSun.Notes.Core\BSun.Notes.Core.csproj" />
+    <ProjectReference Include="..\..\Source\BSun.Notes.FileSystem\BSun.Notes.FileSystem.csproj" />
   </ItemGroup>
 
 </Project>
