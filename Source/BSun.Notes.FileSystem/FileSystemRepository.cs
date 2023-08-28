@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BSun.Notes.Core;
 
 namespace BSun.Notes.FileSystem
@@ -30,7 +31,14 @@ namespace BSun.Notes.FileSystem
 
          if (item is not FileSystemNote fileSystemNote)
          {
-            return false;
+            fileSystemNote = new FileSystemNote
+            {
+               FileName = GetFileNameForTitle(item.Title),
+               Text = item.Text,
+               Title = item.Title,
+            };
+
+            //return false;
          }
 
          var path = System.IO.Path.Combine(_directoryName, fileSystemNote.FileName);
@@ -39,6 +47,14 @@ namespace BSun.Notes.FileSystem
          System.IO.File.WriteAllText(path, contents);
 
          return true;
+      }
+
+      public string GetFileNameForTitle(string title)
+      {
+         var invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+         var result = new string(title.Select(x => invalidFileNameChars.Contains(x) ? '-' : x).ToArray());
+
+         return result + ".note";
       }
    }
 }
