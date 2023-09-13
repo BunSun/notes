@@ -3,6 +3,7 @@ using System.IO;
 using System;
 using System.Windows.Forms;
 using BSun.Notes.Core;
+using BSun.Notes.Core.Presentation;
 
 namespace BSun.Notes.WindowsApp
 {
@@ -10,11 +11,15 @@ namespace BSun.Notes.WindowsApp
    {
       private List<string> _noteFiles;
       private ListBox listBoxNotes;
+      private readonly NotesListController _controller;
 
-      public NotesListForm()
+      public NotesListForm(NotesListController controller)
       {
          InitializeComponent();
          _noteFiles = LoadNoteFiles();
+         _controller = controller;
+
+         _controller.Model.NotesUpdated += (sender, e) => PopulateNoteList();
          PopulateNoteList();
       }
 
@@ -31,7 +36,8 @@ namespace BSun.Notes.WindowsApp
       private void PopulateNoteList()
       {
          listBoxNotes.DataSource = null;
-         listBoxNotes.DataSource = _noteFiles;
+         //listBoxNotes.DataSource = _noteFiles;
+         listBoxNotes.DataSource = _controller.Model.NoteFiles;
       }
 
       private void OpenNoteForm(string noteFilePath)

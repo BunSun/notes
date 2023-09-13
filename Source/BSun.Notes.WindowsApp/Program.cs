@@ -22,10 +22,16 @@ namespace BSun.Notes.WindowsApp
 
          var repository = new FileSystemRepository(notesFolderPath);
          var note = new Core.Note();
-         var noteModel = new Core.NoteModel(note);
+
+
+         var noteModel = new Core.NoteModel(new Core.Note());
          var noteController = new Core.NoteController(noteModel, repository);
 
-         Application.Run(new MainForm(noteController));
+         var notesListModel = new Core.Presentation.NotesListModel();
+         var notesListController = new Core.Presentation.NotesListController(notesListModel, repository);
+
+         //Application.Run(new MainForm(noteController));
+         Application.Run(new NotesListForm(notesListController));
 
          //Application.Run(new NotesListForm());
       }
