@@ -4,12 +4,12 @@ using BSun.Notes.Core;
 
 namespace BSun.Notes.WindowsApp
 {
-   public partial class MainForm : Form
+   public partial class NewNoteForm : Form
    {
       private readonly NoteController _controller;
       
 
-      public MainForm(NoteController controller)
+      public NewNoteForm(NoteController controller)
       {
          _controller = controller;
 

@@ -51,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="NewNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="NewNoteForm.Designer.cs">
+      <DependentUpon>NewNoteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NotesListForm.cs">
       <SubType>Form</SubType>
@@ -65,8 +65,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="NewNoteForm.resx">
+      <DependentUpon>NewNoteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotesListForm.resx">
       <DependentUpon>NotesListForm.cs</DependentUpon>

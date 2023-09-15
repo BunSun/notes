@@ -33,7 +33,7 @@ namespace BSun.Notes.WindowsApp
 
       private void HandleNewNoteClicked(object sender, NewNoteEventArgs e)
       {
-         var dialog = new MainForm(e.Controller);
+         var dialog = new NewNoteForm(e.Controller);
 
          if (dialog.ShowDialog() == DialogResult.OK)
          {
@@ -67,7 +67,7 @@ namespace BSun.Notes.WindowsApp
          // FIXME
          var noteController = new NoteController(noteModel, null);
 
-         var noteEditForm = new MainForm(noteController);
+         var noteEditForm = new NewNoteForm(noteController);
 
          noteEditForm.FormClosed += (sender, e) =>
          {

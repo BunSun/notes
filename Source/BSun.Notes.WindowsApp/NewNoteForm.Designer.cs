@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace BSun.Notes.WindowsApp
 {
-   partial class MainForm
+   partial class NewNoteForm
    {
       // private System.ComponentModel.IContainer components = null;
       private TextBox textBoxTitle;
@@ -86,7 +86,7 @@ namespace BSun.Notes.WindowsApp
             this.buttonCancel.Text = "Abbrechen";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // MainForm
+            // NewNoteForm
             // 
             this.ClientSize = new System.Drawing.Size(581, 261);
             this.Controls.Add(this.buttonCancel);
@@ -96,7 +96,10 @@ namespace BSun.Notes.WindowsApp
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.textBoxText);
             this.Controls.Add(this.buttonSave);
-            this.Name = "MainForm";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "NewNoteForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
