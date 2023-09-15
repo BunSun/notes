@@ -21,23 +21,10 @@ namespace BSun.Notes.Core.Presentation
          NotesUpdated?.Invoke(this, EventArgs.Empty);
       }
 
-      public void RaiseNewNoteClicked(Core.IRepository<Core.Note> repository)
+      public void RaiseNewNoteClicked(NoteController controller)
       {
-         var note = new Note();
-         var model = new NoteModel(note);
-         var controller = new NoteController(model, repository);
          var e = new NewNoteEventArgs(controller);
          NewNoteClicked?.Invoke(this, e);
       }
-   }
-
-   public sealed class NewNoteEventArgs : EventArgs
-   {
-      public NewNoteEventArgs(NoteController controller)
-      {
-         Controller = controller;
-      }
-
-      public NoteController Controller { get; }
    }
 }

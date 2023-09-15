@@ -21,10 +21,11 @@ namespace BSun.Notes.Core.Presentation
 
       public void NewNote()
       {
-         // new notecontroller
-         // new note model ?
-         // trigger event through Model for UI to show new form.
-         throw new NotImplementedException();
+         var note = new Note();
+         var model = new NoteModel(note);
+         var controller = new NoteController(model, _repository);
+
+         Model.RaiseNewNoteClicked(controller);
       }
    }
 }

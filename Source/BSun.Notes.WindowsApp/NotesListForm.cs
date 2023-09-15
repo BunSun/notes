@@ -15,12 +15,31 @@ namespace BSun.Notes.WindowsApp
 
       public NotesListForm(NotesListController controller)
       {
-         InitializeComponent();
-         _noteFiles = LoadNoteFiles();
+         // External dependencies.
          _controller = controller;
 
-         _controller.Model.NotesUpdated += (sender, e) => PopulateNoteList();
+         // Fields
+         _noteFiles = LoadNoteFiles();
+
+         InitializeComponent();
+      }
+
+      private void NotesListForm_Load(object sender, EventArgs e)
+      {
+         _controller.Model.NewNoteClicked += HandleNewNoteClicked;
+         _controller.Model.NotesUpdated += (sender2, e2) => PopulateNoteList();
          PopulateNoteList();
+      }
+
+      private void HandleNewNoteClicked(object sender, NewNoteEventArgs e)
+      {
+         var dialog = new MainForm(e.Controller);
+
+         if (dialog.ShowDialog() == DialogResult.OK)
+         {
+            // ..._noteFiles = LoadNoteFiles();
+            // PopulateNoteList();
+         }
       }
 
       private List<string> LoadNoteFiles()

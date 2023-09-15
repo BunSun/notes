@@ -18,10 +18,9 @@ namespace BSun.Notes.WindowsApp
             // listBoxNotes
             // 
             this.listBoxNotes.FormattingEnabled = true;
-            this.listBoxNotes.ItemHeight = 16;
             this.listBoxNotes.Location = new System.Drawing.Point(12, 27);
             this.listBoxNotes.Name = "listBoxNotes";
-            this.listBoxNotes.Size = new System.Drawing.Size(200, 228);
+            this.listBoxNotes.Size = new System.Drawing.Size(200, 225);
             this.listBoxNotes.TabIndex = 0;
             // 
             // menuStrip1
@@ -76,6 +75,7 @@ namespace BSun.Notes.WindowsApp
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "NotesListForm";
             this.Text = "Notes List";
+            this.Load += new System.EventHandler(this.NotesListForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
