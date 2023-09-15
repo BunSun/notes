@@ -18,5 +18,13 @@ namespace BSun.Notes.Core.Presentation
       public NotesListModel Model => _model;
 
       public void LoadNotes(string path) => _model.LoadNotes(path);
+
+      public void NewNote()
+      {
+         // new notecontroller
+         // new note model ?
+         // trigger event through Model for UI to show new form.
+         throw new NotImplementedException();
+      }
    }
 }

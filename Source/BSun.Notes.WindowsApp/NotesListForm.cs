@@ -77,7 +77,8 @@ namespace BSun.Notes.WindowsApp
 
       private void newNoteToolStripMenuItem_Click(object sender, EventArgs e)
       {
-         OpenNoteForm(null);
+         _controller.NewNote();
+         //OpenNoteForm(null);
       }
 
       private void buttonDelete_Click(object sender, EventArgs e)
