@@ -26,8 +26,13 @@ namespace BSun.Notes.WindowsApp
 
       private void NotesListForm_Load(object sender, EventArgs e)
       {
+         // Schritt 1: Binden
+         listBoxNotes.DataBindings.Add(new Binding(nameof(ListBox.DataSource), _controller.Model, nameof(INotesListModel.NotesDataSource)));
+         listBoxNotes.DisplayMember = nameof(Core.Note.Title);
+
          _controller.Model.NewNoteClicked += HandleNewNoteClicked;
          _controller.Model.NotesUpdated += (sender2, e2) => PopulateNoteList();
+
          PopulateNoteList();
       }
 
@@ -54,9 +59,9 @@ namespace BSun.Notes.WindowsApp
 
       private void PopulateNoteList()
       {
-         listBoxNotes.DataSource = null;
+         //listBoxNotes.DataSource = null;
          //listBoxNotes.DataSource = _noteFiles;
-         listBoxNotes.DataSource = _controller.Model.NoteFiles;
+         //listBoxNotes.DataSource = _controller.Model.NoteFiles;
       }
 
       private void OpenNoteForm(string noteFilePath)

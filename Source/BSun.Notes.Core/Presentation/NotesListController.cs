@@ -12,7 +12,15 @@ namespace BSun.Notes.Core.Presentation
       public NotesListController(NotesListModel model, IRepository<Note> repository)
       {
          _model = model;
+         // Schritt 3 - Auf Ereignis reagieren.
+         _model.NeedNotes += HandleNeedNotes;
          _repository = repository;
+      }
+
+      // Schritt 3 - Implementierung.
+      private void HandleNeedNotes(object sender, NeedNotesEventArgs e)
+      {
+         e.Notes = _repository.ReadAll();
       }
 
       public NotesListModel Model => _model;
