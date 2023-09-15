@@ -24,7 +24,7 @@ namespace BSun.Notes.FileSystem.Tests
          var expectedContent = string.Join(Environment.NewLine, title, text);
          var note = new FileSystemNote
          {
-            FileName = fileName,
+            Path = fileName,
             Text = "Text",
             Title = "Title",
          };

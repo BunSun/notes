@@ -1,7 +1,7 @@
-﻿namespace BSun.Notes.FileSystem
+namespace BSun.Notes.FileSystem
 {
    public sealed class FileSystemNote : Core.Note
    {
-      public string? FileName { get; set; }
+      public string Path { get; set; }
    }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using BSun.Notes.Core;
 
@@ -23,7 +24,20 @@ namespace BSun.Notes.FileSystem
 
       public IEnumerable<Note> ReadAll()
       {
-         throw new NotImplementedException();
+         var results = new List<Core.Note>();
+         foreach (var path in Directory.GetFiles(_directoryName))
+         {
+            var lines = File.ReadAllLines(path);
+            var title = lines[0];
+            var text = string.Join(Environment.NewLine, lines.Skip(1));
+
+            var note = new FileSystemNote { Path = path, Text = text, Title = title };
+
+            results.Add(note);
+         }
+
+
+         return results;
       }
 
       public bool Write(Note item)
@@ -35,7 +49,7 @@ namespace BSun.Notes.FileSystem
          {
             fileSystemNote = new FileSystemNote
             {
-               FileName = GetFileNameForTitle(item.Title),
+               Path = GetFileNameForTitle(item.Title),
                Text = item.Text,
                Title = item.Title,
             };
@@ -43,7 +57,7 @@ namespace BSun.Notes.FileSystem
             //return false;
          }
 
-         var path = System.IO.Path.Combine(_directoryName, fileSystemNote.FileName);
+         var path = System.IO.Path.Combine(_directoryName, fileSystemNote.Path);
          var contents = string.Join(Environment.NewLine, fileSystemNote.Title, fileSystemNote.Text);
 
          System.IO.File.WriteAllText(path, contents);
