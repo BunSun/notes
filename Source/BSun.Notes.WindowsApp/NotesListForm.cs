@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using BSun.Notes.Core;
 using BSun.Notes.Core.Presentation;
+using BSun.Notes.FileSystem;
 
 namespace BSun.Notes.WindowsApp
 {
@@ -26,8 +27,6 @@ namespace BSun.Notes.WindowsApp
 
       private void NotesListForm_Load(object sender, EventArgs e)
       {
-         // Schritt 1: Binden
-         listBoxNotes.DataBindings.Add(new Binding(nameof(ListBox.DataSource), _controller.Model, nameof(INotesListModel.NotesDataSource)));
          listBoxNotes.DisplayMember = nameof(Core.Note.Title);
 
          _controller.Model.NewNoteClicked += HandleNewNoteClicked;
@@ -42,15 +41,16 @@ namespace BSun.Notes.WindowsApp
 
          if (dialog.ShowDialog() == DialogResult.OK)
          {
-            // ..._noteFiles = LoadNoteFiles();
-            // PopulateNoteList();
+            _noteFiles = LoadNoteFiles();
+            PopulateNoteList();
          }
       }
+      string notesFolderPath;
 
       private List<string> LoadNoteFiles()
       {
          string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-         string notesFolderPath = Path.Combine(desktopPath, "Notes");
+         notesFolderPath = Path.Combine(desktopPath, "Notes");
 
          Directory.CreateDirectory(notesFolderPath);
 
@@ -59,18 +59,24 @@ namespace BSun.Notes.WindowsApp
 
       private void PopulateNoteList()
       {
-         //listBoxNotes.DataSource = null;
-         //listBoxNotes.DataSource = _noteFiles;
-         //listBoxNotes.DataSource = _controller.Model.NoteFiles;
+         // Erneutes Binden der Datenquelle
+         listBoxNotes.DataSource = null;
+         listBoxNotes.DataSource = _controller.Model.NotesDataSource;
+         listBoxNotes.DisplayMember = nameof(Core.Note.Title); // Setzen Sie den DisplayMember nach der DataSource erneut.
       }
 
       private void OpenNoteForm(string noteFilePath)
       {
+         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+         var notesFolderPath = Path.Combine(desktopPath, "Notes");
+         Directory.CreateDirectory(notesFolderPath);
+
+         var repository = new FileSystemRepository(notesFolderPath);
          // FIXME
          var noteModel = new NoteModel(new Note());
          noteModel.Load(noteFilePath);
          // FIXME
-         var noteController = new NoteController(noteModel, null);
+         var noteController = new NoteController(noteModel, repository);
 
          var noteEditForm = new NewNoteForm(noteController);
 
@@ -94,7 +100,8 @@ namespace BSun.Notes.WindowsApp
       {
          if (listBoxNotes.SelectedItem != null)
          {
-            string selectedNoteFilePath = listBoxNotes.SelectedItem.ToString();
+            FileSystemNote Note = (FileSystemNote)listBoxNotes.SelectedItem;
+            string selectedNoteFilePath = Note.Path;
             OpenNoteForm(selectedNoteFilePath);
          }
       }
@@ -109,7 +116,8 @@ namespace BSun.Notes.WindowsApp
       {
          if (listBoxNotes.SelectedItem != null)
          {
-            string selectedNoteFilePath = listBoxNotes.SelectedItem.ToString();
+            FileSystemNote Note = (FileSystemNote)listBoxNotes.SelectedItem;
+            string selectedNoteFilePath = Note.Path;
             DeleteNote(selectedNoteFilePath);
          }
       }
@@ -125,6 +133,10 @@ namespace BSun.Notes.WindowsApp
                _noteFiles.Remove(noteFilePath);
                PopulateNoteList();
             }
+         }
+         else
+         {
+            MessageBox.Show("The note file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
          }
       }
    }

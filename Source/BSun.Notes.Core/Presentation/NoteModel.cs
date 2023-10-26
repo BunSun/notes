@@ -17,6 +17,7 @@ namespace BSun.Notes.Core
       public NoteModel(Note note)
       {
          _note = note;
+         Text = "";
       }
 
       public Note Note { get { return _note; } }

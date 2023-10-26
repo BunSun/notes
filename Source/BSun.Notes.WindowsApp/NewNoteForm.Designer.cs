@@ -16,8 +16,6 @@ namespace BSun.Notes.WindowsApp
             this.textBoxText = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonNewNote = new System.Windows.Forms.Button();
-            this.comboBoxCategories = new System.Windows.Forms.ComboBox();
-            this.buttonAddCategory = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -25,7 +23,7 @@ namespace BSun.Notes.WindowsApp
             // 
             this.textBoxTitle.Location = new System.Drawing.Point(90, 30);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(200, 20);
+            this.textBoxTitle.Size = new System.Drawing.Size(200, 22);
             this.textBoxTitle.TabIndex = 0;
             this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
             // 
@@ -58,24 +56,6 @@ namespace BSun.Notes.WindowsApp
             this.buttonNewNote.Text = "+";
             this.buttonNewNote.UseVisualStyleBackColor = true;
             // 
-            // comboBoxCategories
-            // 
-            this.comboBoxCategories.FormattingEnabled = true;
-            this.comboBoxCategories.Location = new System.Drawing.Point(90, 0);
-            this.comboBoxCategories.Name = "comboBoxCategories";
-            this.comboBoxCategories.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCategories.TabIndex = 4;
-            // 
-            // buttonAddCategory
-            // 
-            this.buttonAddCategory.Location = new System.Drawing.Point(215, 0);
-            this.buttonAddCategory.Name = "buttonAddCategory";
-            this.buttonAddCategory.Size = new System.Drawing.Size(39, 23);
-            this.buttonAddCategory.TabIndex = 5;
-            this.buttonAddCategory.Text = "buttonAddCategory";
-            this.buttonAddCategory.UseVisualStyleBackColor = true;
-            this.buttonAddCategory.Click += new System.EventHandler(this.buttonAddCategory_Click);
-            // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -90,8 +70,6 @@ namespace BSun.Notes.WindowsApp
             // 
             this.ClientSize = new System.Drawing.Size(581, 261);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonAddCategory);
-            this.Controls.Add(this.comboBoxCategories);
             this.Controls.Add(this.buttonNewNote);
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.textBoxText);
@@ -107,8 +85,6 @@ namespace BSun.Notes.WindowsApp
       }
 
       private Button buttonNewNote;
-      private ComboBox comboBoxCategories;
-      private Button buttonAddCategory;
       private Button buttonCancel;
    }
 

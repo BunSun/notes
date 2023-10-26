@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace BSun.Notes.Core.Presentation
 {
@@ -26,6 +27,7 @@ namespace BSun.Notes.Core.Presentation
       public NotesListModel Model => _model;
 
       public void LoadNotes(string path) => _model.LoadNotes(path);
+      public void DeleteNotes(string path) => _model.DeleteNotes(path);
 
       public void NewNote()
       {
@@ -35,5 +37,6 @@ namespace BSun.Notes.Core.Presentation
 
          Model.RaiseNewNoteClicked(controller);
       }
+
    }
 }

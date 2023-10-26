@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 
@@ -9,34 +10,27 @@ namespace BSun.Notes.Core.Presentation
    public class NotesListModel : INotesListModel
    {
       public event EventHandler<NewNoteEventArgs> NewNoteClicked;
-
       public event EventHandler<NeedNotesEventArgs> NeedNotes;
-
       public event EventHandler NotesUpdated;
-
       public event EventHandler NotesDataSourceChanged;
 
-      private List<Note> _notes;
+      private BindingList<Note> _notes;
 
-      // Schritt 2 - Wenn Databinding die Eigenschaft aufruft.
       public IList NotesDataSource
       {
          get
          {
-            // Schritt 2.1 Leere Liste erstellen, damit nie ein Fehler auftritt
-            var results = new List<Note>();
-            // Schritt 2.2 EventArgs erzeugen
+            var results = new BindingList<Note>();
             var e = new NeedNotesEventArgs();
-            // Schritt 2.3 Event auslösen UND AUF ERGEBNIS WARTEN
             NeedNotes?.Invoke(this, e);
             if (e.Notes != null)
             {
-               // Schritt 2.4 Daten aus Event-Behandlung in Liste übernehmen
-               results.AddRange(e.Notes);
+               foreach (var note in e.Notes)
+               {
+                  results.Add(note);
+               }
             }
-
-            // Ergebnis in erwartetem Datentyp liefern.
-            return (IList)results;
+            return results;
          }
       }
 
@@ -44,13 +38,19 @@ namespace BSun.Notes.Core.Presentation
 
       public NotesListModel()
       {
-         _notes = new List<Note>();
-
+         _notes = new BindingList<Note>();
          NoteFiles = new List<string>();
       }
 
       public void LoadNotes(string path)
       {
+         NoteFiles = new List<string>(Directory.GetFiles(path, "*.txt"));
+         NotesUpdated?.Invoke(this, EventArgs.Empty);
+      }
+
+      public void DeleteNotes(string path)
+      {
+         File.Delete(path);
          NoteFiles = new List<string>(Directory.GetFiles(path, "*.txt"));
          NotesUpdated?.Invoke(this, EventArgs.Empty);
       }
@@ -63,7 +63,11 @@ namespace BSun.Notes.Core.Presentation
 
       public void SetNotes(IEnumerable<Core.Note> notes)
       {
-         _notes = new List<Note>(notes);
+         _notes.Clear();
+         foreach (var note in notes)
+         {
+            _notes.Add(note);
+         }
       }
    }
 }

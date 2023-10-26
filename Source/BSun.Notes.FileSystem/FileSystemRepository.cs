@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using BSun.Notes.Core;
 
 namespace BSun.Notes.FileSystem
@@ -58,9 +59,47 @@ namespace BSun.Notes.FileSystem
          }
 
          var path = System.IO.Path.Combine(_directoryName, fileSystemNote.Path);
-         var contents = string.Join(Environment.NewLine, fileSystemNote.Title, fileSystemNote.Text);
 
-         System.IO.File.WriteAllText(path, contents);
+         // Entferne den Titel aus fileSystemNote.Text
+
+         var textLines = fileSystemNote.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+         if (textLines.Length > 1)
+         {
+            fileSystemNote.Text = string.Join(Environment.NewLine, textLines.Skip(1));
+         }
+
+         // Prüfen, ob die Datei bereits existiert
+         if (System.IO.File.Exists(path))
+         {
+            var existingContent = System.IO.File.ReadAllText(path);
+
+            // Überprüfen, ob der Titel bereits im Inhalt der Datei existiert
+            if (!existingContent.StartsWith(fileSystemNote.Title))
+            {
+               // Wenn nicht, dann füge den Titel und den Text hinzu
+               var contents = string.Join(Environment.NewLine, fileSystemNote.Title, fileSystemNote.Text);
+               System.IO.File.WriteAllText(path, contents);
+            }
+            else
+            {
+               // Wenn der Titel bereits existiert, ersetze nur den Text nach dem Titel
+               var lines = existingContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+               if (lines.Length > 0)
+               {
+                  // Ersetze alles nach dem ersten Zeilenumbruch mit dem neuen Text
+                  lines[1] = fileSystemNote.Text;
+                  var updatedContent = string.Join(Environment.NewLine, lines[0], fileSystemNote.Text);
+                  System.IO.File.WriteAllText(path, updatedContent);
+               }
+            }
+         }
+         else
+         {
+            // Wenn die Datei nicht existiert, schreibe Titel und Text
+            var contents = string.Join(Environment.NewLine, fileSystemNote.Title, fileSystemNote.Text);
+            System.IO.File.WriteAllText(path, contents);
+         }
+
 
          return true;
       }
