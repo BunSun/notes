@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BSun.Notes.Core;
 using BSun.Notes.Core.Presentation;
 using BSun.Notes.FileSystem;
+using System.Drawing;
 
 namespace BSun.Notes.WindowsApp
 {
@@ -23,6 +24,7 @@ namespace BSun.Notes.WindowsApp
          _noteFiles = LoadNoteFiles();
 
          _controller.OpenNoteRequested += Controller_OpenNoteRequested;
+         _controller.DeleteNoteRequested += Controller_DeleteNoteRequested;
 
          InitializeComponent();
       }
@@ -39,6 +41,24 @@ namespace BSun.Notes.WindowsApp
          };
 
          noteEditForm.ShowDialog();
+      }
+
+      private void Controller_DeleteNoteRequested(string noteFilePath)
+      {
+         if (File.Exists(noteFilePath))
+         {
+            DialogResult result = MessageBox.Show("Do you want to delete this note?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+               File.Delete(noteFilePath);
+               _controller.LoadNotes(); // Refresh the notes list after deletion
+            }
+         }
+         else
+         {
+            MessageBox.Show("The note file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
       }
 
       private void NotesListForm_Load(object sender, EventArgs e)

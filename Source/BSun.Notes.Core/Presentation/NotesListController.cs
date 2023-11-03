@@ -10,7 +10,7 @@ namespace BSun.Notes.Core.Presentation
       private readonly IRepository<Note> _repository;
       private string _notesFolderPath;
       public event Action<NoteController> OpenNoteRequested;
-      public event Action<NoteController> DeleteNoteRequested;
+      public event Action<string> DeleteNoteRequested;
 
 
       public NotesListController(NotesListModel model, IRepository<Note> repository)
@@ -54,20 +54,7 @@ namespace BSun.Notes.Core.Presentation
        
       public void DeleteNote(string noteFilePath)
       {
-         if (File.Exists(noteFilePath))
-         {
-            DialogResult result = MessageBox.Show("Do you want to delete this note?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-               File.Delete(noteFilePath);
-               LoadNotes(); // Refresh the notes list after deletion
-            }
-         }
-         else
-         {
-            MessageBox.Show("The note file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
+         DeleteNoteRequested?.Invoke(noteFilePath);
       }
 
       public void OpenNote(string noteFilePath)
