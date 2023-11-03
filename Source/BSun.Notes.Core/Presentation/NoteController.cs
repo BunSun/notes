@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using BSun.Notes.Core;
-
 namespace BSun.Notes.Core
 {
    public sealed class NoteController

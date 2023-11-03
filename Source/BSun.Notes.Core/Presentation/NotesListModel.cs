@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Text;
 
 namespace BSun.Notes.Core.Presentation
 {
@@ -44,13 +43,6 @@ namespace BSun.Notes.Core.Presentation
 
       public void LoadNotes(string path)
       {
-         NoteFiles = new List<string>(Directory.GetFiles(path, "*.txt"));
-         NotesUpdated?.Invoke(this, EventArgs.Empty);
-      }
-
-      public void DeleteNotes(string path)
-      {
-         File.Delete(path);
          NoteFiles = new List<string>(Directory.GetFiles(path, "*.txt"));
          NotesUpdated?.Invoke(this, EventArgs.Empty);
       }

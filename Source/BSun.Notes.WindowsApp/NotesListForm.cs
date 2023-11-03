@@ -22,7 +22,23 @@ namespace BSun.Notes.WindowsApp
          // Fields
          _noteFiles = LoadNoteFiles();
 
+         _controller.OpenNoteRequested += Controller_OpenNoteRequested;
+
          InitializeComponent();
+      }
+
+      private void Controller_OpenNoteRequested(NoteController noteController)
+      {
+         var noteEditForm = new NewNoteForm(noteController);
+         noteEditForm.FormClosed += (sender, e) =>
+         {
+            if (noteEditForm.DialogResult == DialogResult.OK)
+            {
+               _controller.LoadNotes();
+            }
+         };
+
+         noteEditForm.ShowDialog();
       }
 
       private void NotesListForm_Load(object sender, EventArgs e)
@@ -65,78 +81,26 @@ namespace BSun.Notes.WindowsApp
          listBoxNotes.DisplayMember = nameof(Core.Note.Title); // Setzen Sie den DisplayMember nach der DataSource erneut.
       }
 
-      private void OpenNoteForm(string noteFilePath)
-      {
-         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-         var notesFolderPath = Path.Combine(desktopPath, "Notes");
-         Directory.CreateDirectory(notesFolderPath);
-
-         var repository = new FileSystemRepository(notesFolderPath);
-         // FIXME
-         var noteModel = new NoteModel(new Note());
-         noteModel.Load(noteFilePath);
-         // FIXME
-         var noteController = new NoteController(noteModel, repository);
-
-         var noteEditForm = new NewNoteForm(noteController);
-
-         noteEditForm.FormClosed += (sender, e) =>
-         {
-            if (noteEditForm.DialogResult == DialogResult.OK)
-            {
-               _noteFiles = LoadNoteFiles();
-               PopulateNoteList();
-            }
-         };
-
-         // Fülle den Titel und Text im Bearbeitungsfenster
-         noteEditForm.PrepopulateNoteFields(noteModel.Title, noteModel.Text);
-
-         noteEditForm.ShowDialog();
-      }
-
-
       private void openNoteToolStripMenuItem_Click(object sender, EventArgs e)
       {
          if (listBoxNotes.SelectedItem != null)
          {
-            FileSystemNote Note = (FileSystemNote)listBoxNotes.SelectedItem;
-            string selectedNoteFilePath = Note.Path;
-            OpenNoteForm(selectedNoteFilePath);
+            FileSystemNote note = (FileSystemNote)listBoxNotes.SelectedItem;
+            _controller.OpenNote(note.Path);
          }
       }
 
       private void newNoteToolStripMenuItem_Click(object sender, EventArgs e)
       {
          _controller.NewNote();
-         //OpenNoteForm(null);
       }
 
       private void buttonDelete_Click(object sender, EventArgs e)
       {
          if (listBoxNotes.SelectedItem != null)
          {
-            FileSystemNote Note = (FileSystemNote)listBoxNotes.SelectedItem;
-            string selectedNoteFilePath = Note.Path;
-            DeleteNote(selectedNoteFilePath);
-         }
-      }
-      private void DeleteNote(string noteFilePath)
-      {
-         if (File.Exists(noteFilePath))
-         {
-            DialogResult result = MessageBox.Show("Do you want to delete this note?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-               File.Delete(noteFilePath);
-               _noteFiles.Remove(noteFilePath);
-               PopulateNoteList();
-            }
-         }
-         else
-         {
-            MessageBox.Show("The note file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            FileSystemNote note = (FileSystemNote)listBoxNotes.SelectedItem;
+            _controller.DeleteNote(note.Path);
          }
       }
    }
