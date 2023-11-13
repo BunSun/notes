@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using BSun.Notes.Core;
 using BSun.Notes.Core.Presentation;
 using BSun.Notes.FileSystem;
-using System.Drawing;
 
 namespace BSun.Notes.WindowsApp
 {

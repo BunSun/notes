@@ -23,7 +23,7 @@ namespace BSun.Notes.WindowsApp
             // 
             this.textBoxTitle.Location = new System.Drawing.Point(90, 30);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(200, 22);
+            this.textBoxTitle.Size = new System.Drawing.Size(200, 20);
             this.textBoxTitle.TabIndex = 0;
             this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
             // 
@@ -68,7 +68,7 @@ namespace BSun.Notes.WindowsApp
             // 
             // NewNoteForm
             // 
-            this.ClientSize = new System.Drawing.Size(581, 261);
+            this.ClientSize = new System.Drawing.Size(378, 231);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonNewNote);
             this.Controls.Add(this.textBoxTitle);
